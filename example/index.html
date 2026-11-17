@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript DOM Masterclass — Interactive Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white py-8 px-4 shadow">
+        <div class="max-w-5xl mx-auto">
+            <span
+                class="inline-block bg-blue-600 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">Frontend
+                Class Module</span>
+            <h1 class="text-3xl md:text-4xl font-bold mt-3">JavaScript DOM Manipulation Lab</h1>
+            <p class="text-slate-300 mt-2">Document Object Model: Selecting, Updating, Styling, Traversing & Events</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-10">
+
+        <!-- ==================== 1. SELECTING ELEMENTS ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">1. Selecting DOM Elements</h2>
+                <code
+                    class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">getElementById | querySelector | querySelectorAll</code>
+            </div>
+
+            <p id="demo-title" class="mt-4 text-lg font-medium text-slate-700">
+                Target Text: I am selected by <span class="font-bold text-blue-600">getElementById</span>
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 mt-4">
+                <div class="demo-card p-4 rounded-lg border border-slate-200 bg-slate-50">Card 1 (.demo-card)</div>
+                <div class="demo-card p-4 rounded-lg border border-slate-200 bg-slate-50">Card 2 (.demo-card)</div>
+                <div class="demo-card p-4 rounded-lg border border-slate-200 bg-slate-50" data-role="special">Card 3
+                    ([data-role="special"])</div>
+            </div>
+
+            <div class="mt-5 flex flex-wrap gap-3">
+                <button id="btn-select-demo"
+                    class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700">
+                    Highlight Selected Elements
+                </button>
+                <button id="btn-select-reset"
+                    class="px-4 py-2 bg-slate-200 text-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-300">
+                    Reset
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== 2. READING & CHANGING CONTENT ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">2. Updating Content (textContent vs innerHTML)</h2>
+                <code class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">textContent | innerHTML</code>
+            </div>
+
+            <div id="content-box" class="mt-4 p-4 rounded-lg bg-slate-100 text-slate-800 font-medium">
+                Original plain text inside #content-box
+            </div>
+
+            <div class="mt-5 flex flex-wrap gap-3">
+                <button id="btn-text-content"
+                    class="px-4 py-2 bg-emerald-600 text-white text-sm font-semibold rounded-lg hover:bg-emerald-700">
+                    Set textContent (Safe Text)
+                </button>
+                <button id="btn-inner-html"
+                    class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700">
+                    Set innerHTML (Parses Tags)
+                </button>
+                <button id="btn-reset-content"
+                    class="px-4 py-2 bg-slate-200 text-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-300">
+                    Reset
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== 3. STYLING & CLASSLIST ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">3. Styling, classList & getComputedStyle</h2>
+                <code
+                    class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">classList.toggle() | style | getComputedStyle()</code>
+            </div>
+
+            <div id="style-box"
+                class="mt-4 p-6 rounded-lg border border-slate-300 bg-white text-slate-800 transition-all duration-300">
+                Toggle my theme or inspect my computed CSS styles! (Used in Bookstore Mobile Menu)
+            </div>
+
+            <p id="computed-output" class="mt-2 text-sm text-slate-500 font-mono"></p>
+
+            <div class="mt-5 flex flex-wrap gap-3">
+                <button id="btn-toggle-theme"
+                    class="px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-700">
+                    Toggle Dark Card (classList.toggle)
+                </button>
+                <button id="btn-check-style"
+                    class="px-4 py-2 bg-amber-500 text-white text-sm font-semibold rounded-lg hover:bg-amber-600">
+                    Read Computed Padding & Bg
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== 4. ATTRIBUTES & DATASET ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">4. Attributes & Custom Data Attributes (dataset)</h2>
+                <code
+                    class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">setAttribute() | element.dataset</code>
+            </div>
+
+            <div
+                class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-lg border">
+                <div>
+                    <p class="text-sm text-slate-500">Custom <code>data-step</code> attribute demo (Same logic as
+                        Bookstore Slider Arrows):</p>
+                    <p class="text-2xl font-bold mt-1">Slide Position: <span id="counter-value"
+                            class="text-blue-600">0</span></p>
+                </div>
+
+                <div class="flex gap-3">
+                    <button data-step="-1"
+                        class="step-btn px-4 py-2 rounded-lg border border-slate-300 bg-white font-semibold hover:bg-slate-100">
+                        ← Prev (data-step="-1")
+                    </button>
+                    <button data-step="1"
+                        class="step-btn px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700">
+                        Next (data-step="1") →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 5. CREATING & REMOVING ELEMENTS ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">5. Creating & Removing Nodes Dynamically</h2>
+                <code
+                    class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">createElement() | appendChild() | remove()</code>
+            </div>
+
+            <div class="mt-4 flex gap-3">
+                <input id="topic-input" type="text" placeholder="Enter a DOM topic (e.g. Event Bubbling)"
+                    class="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600" />
+                <button id="btn-add-topic"
+                    class="px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">
+                    Add Item
+                </button>
+            </div>
+
+            <ul id="topic-list" class="mt-4 space-y-2">
+                <li class="flex items-center justify-between p-3 bg-slate-50 border rounded-lg">
+                    <span>DOM Tree Structure</span>
+                    <button class="delete-btn text-xs text-red-600 font-semibold hover:underline">Remove</button>
+                </li>
+            </ul>
+        </section>
+
+        <!-- ==================== 6. ARRAY DATA -> UI (forEach vs map) ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">6. Rendering Data Arrays (forEach vs map)</h2>
+                <code class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">forEach(+=) | map().join("")</code>
+            </div>
+
+            <p class="mt-2 text-sm text-slate-600">
+                Direct match with Bookstore's <code>recommendedBooks</code> (forEach) & <code>bestBooks</code> (map).
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-3">
+                <button id="btn-render-foreach"
+                    class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700">
+                    Render with forEach()
+                </button>
+                <button id="btn-render-map"
+                    class="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg hover:bg-purple-700">
+                    Render with map().join("")
+                </button>
+                <button id="btn-clear-books"
+                    class="px-4 py-2 bg-slate-200 text-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-300">
+                    Clear Grid
+                </button>
+            </div>
+
+            <div id="demo-book-grid" class="mt-5 grid sm:grid-cols-3 gap-4"></div>
+        </section>
+
+        <!-- ==================== 7. DOM TRAVERSING ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">7. DOM Traversing (Moving Between Nodes)</h2>
+                <code
+                    class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">parentElement | firstElementChild | nextElementSibling</code>
+            </div>
+
+            <div id="traverse-parent" class="mt-4 grid grid-cols-3 gap-3 p-4 bg-slate-100 rounded-lg">
+                <div class="p-3 bg-white border rounded text-center font-medium">Child 1 (firstElementChild)</div>
+                <div id="middle-child"
+                    class="p-3 bg-blue-50 border-2 border-blue-500 rounded text-center font-bold text-blue-700">Child 2
+                    (Target)</div>
+                <div class="p-3 bg-white border rounded text-center font-medium">Child 3 (nextElementSibling)</div>
+            </div>
+
+            <p id="traverse-log" class="mt-3 text-sm font-mono text-slate-700"></p>
+
+            <button id="btn-traverse"
+                class="mt-4 px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-700">
+                Inspect Siblings & Parent from Child 2
+            </button>
+        </section>
+
+        <!-- ==================== 8. EVENTS & EVENT DELEGATION ==================== -->
+        <section class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+                <h2 class="text-xl font-bold text-slate-900">8. Form Events & Event Delegation</h2>
+                <code
+                    class="text-xs bg-slate-100 px-2 py-1 rounded text-blue-700">addEventListener | e.preventDefault() | e.target.closest()</code>
+            </div>
+
+            <!-- Form submit demo -->
+            <form id="demo-form" class="mt-4 flex flex-col sm:flex-row gap-3">
+                <input id="email-input" type="email" required placeholder="Type email & submit (preventDefault demo)"
+                    class="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-600" />
+                <button type="submit"
+                    class="px-5 py-2 bg-amber-500 text-white font-semibold rounded-lg hover:bg-amber-600">
+                    Subscribe
+                </button>
+            </form>
+            <p id="form-feedback" class="mt-2 text-sm font-medium text-emerald-600"></p>
+
+            <!-- Event Delegation Demo (Wishlist Hearts) -->
+            <div class="mt-6 border-t pt-4">
+                <p class="text-sm font-semibold text-slate-700 mb-3">
+                    Event Delegation Demo (Click hearts — works even on dynamically added cards!):
+                </p>
+                <div id="wishlist-container" class="flex flex-wrap gap-4">
+                    <div class="flex items-center gap-3 px-4 py-2 border rounded-lg bg-slate-50">
+                        <span>Abstract Art</span>
+                        <button class="heart-btn text-slate-400 hover:text-red-500 text-xl transition"
+                            aria-label="Wishlist">♥</button>
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-2 border rounded-lg bg-slate-50">
+                        <span>Educated</span>
+                        <button class="heart-btn text-slate-400 hover:text-red-500 text-xl transition"
+                            aria-label="Wishlist">♥</button>
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-2 border rounded-lg bg-slate-50">
+                        <span>Design Theory</span>
+                        <button class="heart-btn text-slate-400 hover:text-red-500 text-xl transition"
+                            aria-label="Wishlist">♥</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
